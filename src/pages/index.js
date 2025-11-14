@@ -1,78 +1,91 @@
 import Image from "next/image";
-import { Geist, Geist_Mono } from "next/font/google";
+import ProfileImage from "@/assets/profile-image.jpg";
+import AppDivider from "@/components/app-divider";
+import { motion } from "motion/react";
+import AppButton from "@/components/app-button";
+import AppCircularButton from "@/components/app-circular-button";
+import GithubIcon from "@/components/icons/github-icon";
+import WebIcon from "@/components/icons/web-icon";
+import { MailIcon } from "lucide-react";
+import TelephoneIcon from "@/components/icons/telephone-icon";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const boxShadowRight = {
+  boxShadow: "105px 0px 250px -147px rgba(242, 133, 24, 1)",
+};
 
 export default function Home() {
   return (
-    <div
-      className={`${geistSans.className} ${geistMono.className} flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black`}
-    >
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the index.js file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <div className="flex flex-col xl:flex-row h-screen snap-y snap-mandatory scrollable">
+      {/* Profile Card - Snap 1*/}
+      <div
+        className="flex relative flex-shrink-0 xl:w-[480px] h-screen snap-start"
+        style={boxShadowRight}
+      >
+        {/* Profile Info */}
+        <div className="flex justify-center w-full m-10">
+          {}
+          <div
+            /** Image Container */
+            className="w-full md:w-[380px] lg:mt-20"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs/pages/getting-started?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            <div className="bg-blue-500 h-[300px] rounded-4xl relative overflow-hidden">
+              <Image
+                src={ProfileImage}
+                alt="Profile"
+                fill
+                className="object-cover"
+              />
+            </div>
+            <div className="text-center mt-10 flex flex-col gap-2">
+              <h1 className="text-4xl">Joshua C. Ramos</h1>
+              <div className="subText">rjosh4457@gmail.com</div>
+              <div className="subText ">Bonifacio Global City, Taguig</div>
+              <motion.div
+                style={{
+                  margin: "0 auto",
+                  marginTop: 20,
+                  display: "flex",
+                  gap: 10,
+                }}
+              >
+                <AppCircularButton icon={<MailIcon />} />
+                <AppCircularButton icon={<TelephoneIcon />} />
+                <AppCircularButton icon={<WebIcon />} />
+                <AppCircularButton icon={<GithubIcon />} />
+              </motion.div>
+
+              <div className="mx-auto">
+                <AppDivider
+                  height={150}
+                  color="var(--borderColor)"
+                  thickness={1}
+                />
+              </div>
+              <motion.div style={{ margin: "0 auto", width: 200 }}>
+                <AppButton
+                  onClick={() => {
+                    document.getElementById("main-section")?.scrollIntoView({
+                      behavior: "smooth",
+                    });
+                  }}
+                >
+                  Contact
+                </AppButton>
+              </motion.div>
+            </div>
+          </div>
         </div>
-      </main>
+      </div>
+
+      <div
+        /* Main section - Snap 2 */
+        id="main-section"
+        className="w-full h-screen snap-start xl:overflow-y-scroll"
+      >
+        <div className="bg-red-500 max-w-[1500px] mx-auto h-[1400px] text-white">
+          Main Content Area (Scrolls vertically)
+        </div>
+      </div>
     </div>
   );
 }
