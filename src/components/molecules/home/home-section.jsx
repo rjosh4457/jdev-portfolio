@@ -27,7 +27,7 @@ const HomeSection = () => {
         Developer
       </motion.h1>
       <motion.h1
-        className="subText"
+        className="sub-text"
         initial={{ opacity: 0, x: -40 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{
@@ -58,7 +58,7 @@ const HomeSection = () => {
               delay: 0.6,
               duration: 1,
             }}
-            className="subText"
+            className="sub-text"
           >
             Years of Experience
           </motion.h1>
@@ -82,7 +82,7 @@ const HomeSection = () => {
               delay: 0.7,
               duration: 1,
             }}
-            className="subText"
+            className="sub-text"
           >
             Projects
           </motion.h1>

@@ -57,6 +57,7 @@ const useSpotlightEffect = (config = {}) => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       // Create dark overlay
+      // Adjust Opacity Here
       ctx.fillStyle = "rgba(0, 0, 0, 0)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 

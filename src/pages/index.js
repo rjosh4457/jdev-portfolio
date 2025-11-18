@@ -15,11 +15,12 @@ import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/autoplay";
 
-import AppTypewriterText from "@/components/app-typewriter-text";
+import BgApp from "@/assets/bg.png";
 import ProfileDetails from "@/components/molecules/profile-details";
 import HomeSection from "@/components/molecules/home/home-section";
 import ProfileImage from "@/components/molecules/profile-image";
 import AboutSection from "@/components/molecules/about/about-section";
+import Experience from "@/components/molecules/experiences/experience";
 
 const boxShadowRight = {
   boxShadow: "105px 0px 250px -147px rgba(242, 133, 24, 1)",
@@ -59,6 +60,7 @@ export default function Home() {
         <div className="flex flex-col gap-4 max-w-[1500px] mx-auto h-auto text-white ">
           <HomeSection />
           <AboutSection />
+          <Experience />
         </div>
       </div>
     </div>

@@ -23,7 +23,7 @@ const ProfileDetails = () => {
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 0.2, duration: 0.6 }}
-        className="subText"
+        className="sub-text"
       >
         rjosh4457@gmail.com
       </motion.p>
@@ -31,7 +31,7 @@ const ProfileDetails = () => {
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 0.4, duration: 0.6 }}
-        className="subText "
+        className="sub-text "
       >
         Bonifacio Global City, Taguig
       </motion.p>
