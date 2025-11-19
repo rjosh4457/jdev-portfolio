@@ -7,9 +7,11 @@ const AppCircularButton = ({ children, ...props }) => {
       style={{ background: "rgba(255, 255, 255, 0.2)" }}
       whileHover={{
         scale: 1.2,
+        ...props.whileHover,
       }}
       whileTap={{
         scale: 0.95,
+        ...props.whileTap,
       }}
       transition={{
         type: "spring",

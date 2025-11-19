@@ -1,4 +1,3 @@
-
 import AppDivider from "@/components/app-divider";
 import { motion } from "motion/react";
 import AppButton from "@/components/app-button";
@@ -7,30 +6,36 @@ import GithubIcon from "@/components/icons/github-icon";
 import WebIcon from "@/components/icons/web-icon";
 import { MailIcon } from "lucide-react";
 import TelephoneIcon from "@/components/icons/telephone-icon";
+import useAnimation from "@/hooks/use-animation";
+import { FadeIn, FadeInLeft } from "@/utils/animation-configs";
 
 const ProfileDetails = () => {
+  const details = useAnimation();
   return (
     <div className="text-center mt-10 flex flex-col gap-2">
       <motion.h1
-        initial={{ opacity: 0, x: -20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ delay: 0, duration: 0.6 }}
+        ref={details.ref}
+        initial={FadeInLeft.initial}
+        animate={details.isInView ? FadeInLeft.animate : {}}
+        transition={FadeInLeft.transition}
         className="text-4xl"
       >
         Joshua C. Ramos
       </motion.h1>
       <motion.p
-        initial={{ opacity: 0, x: -20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ delay: 0.2, duration: 0.6 }}
+        ref={details.ref}
+        initial={FadeInLeft.initial}
+        animate={details.isInView ? FadeInLeft.animate : {}}
+        transition={{ delay: 0.1, ...FadeInLeft.transition }}
         className="sub-text"
       >
         rjosh4457@gmail.com
       </motion.p>
       <motion.p
-        initial={{ opacity: 0, x: -20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ delay: 0.4, duration: 0.6 }}
+        ref={details.ref}
+        initial={FadeInLeft.initial}
+        animate={details.isInView ? FadeInLeft.animate : {}}
+        transition={{ delay: 0.2, ...FadeInLeft.transition }}
         className="sub-text "
       >
         Bonifacio Global City, Taguig
@@ -43,36 +48,40 @@ const ProfileDetails = () => {
         }}
       >
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5, duration: 0.6 }}
+          ref={details.ref}
+          initial={FadeIn.initial}
+          animate={details.isInView ? FadeIn.animate : {}}
+          transition={{ delay: 0.3, ...FadeIn.transition }}
         >
           <AppCircularButton>
             <MailIcon />
           </AppCircularButton>
         </motion.div>
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.6, duration: 0.6 }}
+          ref={details.ref}
+          initial={FadeIn.initial}
+          animate={details.isInView ? FadeIn.animate : {}}
+          transition={{ delay: 0.4, ...FadeIn.transition }}
         >
           <AppCircularButton>
             <TelephoneIcon />
           </AppCircularButton>
         </motion.div>
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.6, duration: 0.6 }}
+          ref={details.ref}
+          initial={FadeIn.initial}
+          animate={details.isInView ? FadeIn.animate : {}}
+          transition={{ delay: 0.4, ...FadeIn.transition }}
         >
           <AppCircularButton>
             <WebIcon />
           </AppCircularButton>
         </motion.div>
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5, duration: 0.6 }}
+          ref={details.ref}
+          initial={FadeIn.initial}
+          animate={details.isInView ? FadeIn.animate : {}}
+          transition={{ delay: 0.3, ...FadeIn.transition }}
         >
           <AppCircularButton>
             <GithubIcon />

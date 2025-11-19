@@ -1,93 +1,111 @@
+import AppPills from "@/components/app-pills";
 import AppSectionDivider from "@/components/app-section-divider";
-import { motion } from "motion/react";
+import useAnimation from "@/hooks/use-animation";
+import { FadeInLeft, ScaleUp } from "@/utils/animation-configs";
+import { inView } from "motion";
+import { motion, useInView } from "motion/react";
+import { useEffect, useRef, useState } from "react";
 
 const HomeSection = () => {
+  const greetings = useAnimation();
+  const stats = useAnimation();
+  const whatIDo = useAnimation();
+
+  const items = [
+    "Web Development",
+    "Mobile Development",
+    "UI Design",
+    "API Integration",
+    "Framer Motion",
+  ];
+
   return (
-    <motion.div className="flex flex-col gap-4">
-      <AppSectionDivider
-        initial={{ opacity: 0, scale: 0.6 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{
-          delay: 0.5,
-          duration: 0.5,
-        }}
-        label="Home"
-      />
+    <motion.div id="home-section" className="flex flex-col gap-10 pt-10 mb-40">
+      <AppSectionDivider {...ScaleUp} label="Home" />
       <motion.h1
-        className="text-4xl"
-        initial={{ opacity: 0, x: -40 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{
-          delay: 0,
-          duration: 1,
-        }}
+        ref={greetings.ref}
+        className="xl:text-6xl text-5xl"
+        initial={FadeInLeft.initial}
+        animate={greetings.isInView ? FadeInLeft.animate : {}}
+        transition={FadeInLeft.transition}
       >
-        I'm
-        <motion.span className="text-highlight">&nbsp;Josh</motion.span>, Web
-        Developer
+        Greetings from
+        <motion.span className="text-highlight">&nbsp;Josh</motion.span>
+        , <br /> Web Developer
       </motion.h1>
       <motion.h1
         className="sub-text"
-        initial={{ opacity: 0, x: -40 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{
-          delay: 0.2,
-          duration: 1,
-        }}
+        ref={greetings.ref}
+        initial={FadeInLeft.initial}
+        animate={greetings.isInView ? FadeInLeft.animate : {}}
+        transition={{ delay: 0.1, ...FadeInLeft.transition }}
       >
         I build and optimize the code behind every interaction, ensuring
         <br /> the final product is fluid, powerful, and ready for any feature.
       </motion.h1>
-      <div className="flex gap-20 py-30">
+      <div className="flex xl:gap-30 gap-10 py-30">
         <div>
           <motion.h1
-            initial={{ opacity: 0, x: -40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{
-              delay: 0.4,
-              duration: 1,
-            }}
-            className="text-7xl text-highlight"
+            ref={stats.ref}
+            initial={FadeInLeft.initial}
+            animate={stats.isInView ? FadeInLeft.animate : {}}
+            transition={{ delay: 0.2, ...FadeInLeft.transition }}
+            className="xl:text-8xl text-6xl text-highlight"
           >
             6+
           </motion.h1>
           <motion.h1
-            initial={{ opacity: 0, x: -40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{
-              delay: 0.6,
-              duration: 1,
-            }}
+            ref={stats.ref}
+            initial={FadeInLeft.initial}
+            animate={stats.isInView ? FadeInLeft.animate : {}}
+            transition={{ delay: 0.3, ...FadeInLeft.transition }}
             className="sub-text"
           >
-            Years of Experience
+            Years of Building
+            <br /> scalable web apps
           </motion.h1>
         </div>
         <div>
           <motion.h1
-            initial={{ opacity: 0, x: -40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{
-              delay: 0.5,
-              duration: 1,
-            }}
-            className="text-7xl text-highlight"
+            ref={stats.ref}
+            initial={FadeInLeft.initial}
+            animate={stats.isInView ? FadeInLeft.animate : {}}
+            transition={{ delay: 0.3, ...FadeInLeft.transition }}
+            className="xl:text-8xl text-6xl text-highlight"
           >
-            100+
+            20+
           </motion.h1>
           <motion.h1
-            initial={{ opacity: 0, x: -40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{
-              delay: 0.7,
-              duration: 1,
-            }}
+            ref={stats.ref}
+            initial={FadeInLeft.initial}
+            animate={stats.isInView ? FadeInLeft.animate : {}}
+            transition={{ delay: 0.4, ...FadeInLeft.transition }}
             className="sub-text"
           >
-            Projects
+            Key Projects
           </motion.h1>
         </div>
       </div>
+
+      <motion.div
+        ref={whatIDo.ref}
+        initial={FadeInLeft.initial}
+        animate={whatIDo.isInView ? FadeInLeft.animate : {}}
+        transition={{ delay: 0.5, ...FadeInLeft.transition }}
+        className="flex flex-wrap max-w-[600px] gap-5"
+      >
+        {items.map((item, index) => {
+          return (
+            <AppPills
+              key={index}
+              initial={FadeInLeft.initial}
+              animate={whatIDo.isInView ? FadeInLeft.animate : {}}
+              transition={{ delay: index * 0.2, ...FadeInLeft.transition }}
+              label={item}
+            />
+          );
+        })}
+      </motion.div>
     </motion.div>
   );
 };

@@ -5,10 +5,28 @@ import GamingIcon from "@/components/icons/gaming-icon";
 import HBOIcon from "@/components/icons/hbo-icon";
 import NetflixIcon from "@/components/icons/netflix-icon";
 import XboxIcon from "@/components/icons/xbox-icon";
+import useAnimation from "@/hooks/use-animation";
+import {
+  FadeInBottom,
+  FadeInLeft,
+  FadeOutBottom,
+  FadeOutLeft,
+  ScaleUp,
+} from "@/utils/animation-configs";
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState } from "react";
 
 const AboutSection = () => {
+  const detailRef = useAnimation();
+
+  const myStacks = [
+    { label: "ReactJS", logo: <AirplaneIcon />, yrs: "5+", bgColor: "" },
+    { label: "VueJS", logo: <AirplaneIcon />, yrs: "5+", bgColor: "" },
+    { label: "NodeJS", logo: <AirplaneIcon />, yrs: "5+", bgColor: "" },
+    { label: "TailwindJS", logo: <AirplaneIcon />, yrs: "5+", bgColor: "" },
+    { label: "Supabase", logo: <AirplaneIcon />, yrs: "5+", bgColor: "" },
+  ];
+
   const [tick, setTick] = useState(0);
   useEffect(() => {
     const interval = setInterval(() => {
@@ -19,14 +37,12 @@ const AboutSection = () => {
   }, []);
 
   return (
-    <motion.div className="flex flex-col gap-4">
+    <motion.div id="about-section" className="flex flex-col gap-10 pt-10 mb-40">
       <AppSectionDivider
-        initial={{ opacity: 0, scale: 0.6 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{
-          delay: 0.5,
-          duration: 0.5,
-        }}
+        ref={detailRef.ref}
+        initial={ScaleUp.initial}
+        animate={detailRef.isInView ? ScaleUp.animate : {}}
+        transition={ScaleUp.transition}
         label="About"
       />
       <AnimatePresence mode="wait">
@@ -36,34 +52,53 @@ const AboutSection = () => {
             className="flex flex-col gap-4 w-full xl:w-[65%]"
           >
             <motion.h1
-              initial={{ opacity: 0, x: -40 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -40 }}
-              transition={{ duration: 1, delay: 1 }}
-              className="text-4xl"
+              ref={detailRef.ref}
+              initial={FadeInLeft.initial}
+              animate={detailRef.isInView ? FadeInLeft.animate : {}}
+              exit={FadeOutLeft.exit}
+              transition={FadeInLeft.transition}
+              className="text-6xl"
             >
               The
-              <motion.span className="text-highlight">
-                &nbsp;Engineer&nbsp;
-              </motion.span>
-              Behind the <br /> Experience
+              <motion.span className="text-highlight"> Engineer </motion.span>
+              Behind the Experience
             </motion.h1>
 
             <motion.h1
-              initial={{ opacity: 0, x: -40 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -40 }}
-              transition={{ duration: 1, delay: 1.1 }}
+              ref={detailRef.ref}
+              initial={FadeInLeft.initial}
+              animate={detailRef.isInView ? FadeInLeft.animate : {}}
+              exit={FadeOutLeft.exit}
+              transition={{ delay: 0.2, ...FadeInLeft.transition }}
+              className="sub-text"
+            ></motion.h1>
+
+            <motion.h1
+              ref={detailRef.ref}
+              initial={FadeInLeft.initial}
+              animate={detailRef.isInView ? FadeInLeft.animate : {}}
+              exit={FadeOutLeft.exit}
+              transition={{ delay: 0.3, ...FadeInLeft.transition }}
               className="sub-text"
             >
-              Hello again! I'm a passionate
-              <span className="text-highlight"> Front-end Engineer</span> with
-              <span className="text-highlight"> 6+</span> years of experience
-              dedicated to making the web a more beautiful, faster, and more
-              intuitive place. My philosophy is simple: Code should be elegant,
-              and the user experience should be seamless. I thrive on
-              translating complex design systems into robust, accessible, and
-              pixel-perfect applications.
+              Hey! I’m Josh — a friendly Web Developer who loves turning ideas
+              into fast, clean, and good-looking websites. I enjoy building
+              smooth user experiences, creating reusable components, and making
+              interfaces feel alive with subtle animations and motion.
+            </motion.h1>
+
+            <motion.h1
+              ref={detailRef.ref}
+              initial={FadeInLeft.initial}
+              animate={detailRef.isInView ? FadeInLeft.animate : {}}
+              exit={FadeOutLeft.exit}
+              transition={{ delay: 0.4, ...FadeInLeft.transition }}
+              className="sub-text"
+            >
+              I care a lot about clean code, performance, and making sure every
+              project is easy to use and even easier to maintain. Whether it's
+              improving UI, optimizing speed, or polishing tiny
+              micro-interactions, I’m always excited to make things better.
             </motion.h1>
           </motion.div>
         )}
@@ -74,50 +109,55 @@ const AboutSection = () => {
             className="flex flex-col gap-4 w-full xl:w-[65%]"
           >
             <motion.h1
-              initial={{ opacity: 0, x: -40 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -40 }}
-              transition={{ duration: 1 }}
-              className="text-4xl"
+              ref={detailRef.ref}
+              initial={FadeInLeft.initial}
+              animate={detailRef.isInView ? FadeInLeft.animate : {}}
+              exit={FadeOutLeft.exit}
+              transition={FadeInLeft.transition}
+              className="text-6xl"
             >
               My Approach to Modern Development
             </motion.h1>
 
             <motion.h1
-              initial={{ opacity: 0, x: -40 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -40 }}
-              transition={{ duration: 1, delay: 0.1 }}
+              ref={detailRef.ref}
+              initial={FadeInLeft.initial}
+              animate={detailRef.isInView ? FadeInLeft.animate : {}}
+              exit={FadeOutLeft.exit}
+              transition={{ delay: 0.2, ...FadeInLeft.transition }}
               className="sub-text"
             >
-              As a specialist in the
-              <span className="text-highlight"> Front-End</span> domain, my
-              focus areas extend beyond just rendering pixels. I am committed to
-              creating highly optimized applications that deliver speed and
-              maintainability
+              As a<span className="text-highlight">&nbsp;Web Developer</span>, I
+              don’t just build interfaces — I create smooth, fast, and enjoyable
+              experiences. I love making apps that feel great to use, easy to
+              maintain, and ready to scale as they grow.
             </motion.h1>
 
             <motion.h1
-              initial={{ opacity: 0, x: -40 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -40 }}
-              transition={{ duration: 1, delay: 0.2 }}
+              ref={detailRef.ref}
+              initial={FadeInLeft.initial}
+              animate={detailRef.isInView ? FadeInLeft.animate : {}}
+              exit={FadeOutLeft.exit}
+              transition={{ delay: 0.2, ...FadeInLeft.transition }}
               className="sub-text"
             >
-              <b>Component Architecture:</b> I specialize in building reusable,
-              scalable component libraries using React/Vue.js to ensure
-              consistency and rapid development across large applications.
+              <b>Component Architecture:</b>
+              <br /> I enjoy creating clean, reusable components in React or
+              Vue.js. It helps keep projects organized, makes development
+              faster, and ensures everything looks and works consistently.
             </motion.h1>
             <motion.h1
-              initial={{ opacity: 0, x: -40 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -40 }}
-              transition={{ duration: 1, delay: 0.3 }}
+              ref={detailRef.ref}
+              initial={FadeInLeft.initial}
+              animate={detailRef.isInView ? FadeInLeft.animate : {}}
+              exit={FadeOutLeft.exit}
+              transition={{ delay: 0.2, ...FadeInLeft.transition }}
               className="sub-text"
             >
-              <b>Performance Optimization:</b> From code splitting and lazy
-              loading to advanced network request handling, I optimize every
-              line to deliver blazing-fast load times.
+              <b>Performance Optimization:</b> <br /> Speed matters. Whether
+              it’s code splitting, lazy loading, or fine-tuning how data is
+              fetched, I’m always focused on making apps load quicker and run
+              smoother.
             </motion.h1>
           </motion.div>
         )}
@@ -127,20 +167,22 @@ const AboutSection = () => {
             className="flex flex-col gap-4 w-full xl:w-[65%]"
           >
             <motion.h1
-              initial={{ opacity: 0, x: -40 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -40 }}
-              transition={{ duration: 1 }}
-              className="text-4xl"
+              ref={detailRef.ref}
+              initial={FadeInLeft.initial}
+              animate={detailRef.isInView ? FadeInLeft.animate : {}}
+              exit={FadeOutLeft.exit}
+              transition={FadeInLeft.transition}
+              className="text-6xl"
             >
               When I'm Not Coding...
             </motion.h1>
 
             <motion.h1
-              initial={{ opacity: 0, x: -40 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -40 }}
-              transition={{ duration: 1, delay: 0.1 }}
+              ref={detailRef.ref}
+              initial={FadeInLeft.initial}
+              animate={detailRef.isInView ? FadeInLeft.animate : {}}
+              exit={FadeOutLeft.exit}
+              transition={{ delay: 0.2, ...FadeInLeft.transition }}
               className="sub-text"
             >
               While I love the challenge of debugging a complex asynchronous
@@ -150,34 +192,38 @@ const AboutSection = () => {
             </motion.h1>
             <motion.div className="flex gap-10 mt-10">
               <motion.div
-                initial={{ opacity: 0, y: 40 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 40 }}
-                transition={{ duration: 1, delay: 0.2 }}
+                ref={detailRef.ref}
+                initial={FadeInBottom.initial}
+                animate={detailRef.isInView ? FadeInBottom.animate : {}}
+                exit={FadeOutBottom.exit}
+                transition={{ delay: 0.2, ...FadeInBottom.transition }}
               >
                 <GamingIcon width={50} height={50} />
               </motion.div>
               <motion.div
-                initial={{ opacity: 0, y: 40 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 40 }}
-                transition={{ duration: 1, delay: 0.3 }}
+                ref={detailRef.ref}
+                initial={FadeInBottom.initial}
+                animate={detailRef.isInView ? FadeInBottom.animate : {}}
+                exit={FadeOutBottom.exit}
+                transition={{ delay: 0.3, ...FadeInBottom.transition }}
               >
                 <HBOIcon width={50} height={50} />
               </motion.div>
               <motion.div
-                initial={{ opacity: 0, y: 40 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 40 }}
-                transition={{ duration: 1, delay: 0.4 }}
+                ref={detailRef.ref}
+                initial={FadeInBottom.initial}
+                animate={detailRef.isInView ? FadeInBottom.animate : {}}
+                exit={FadeOutBottom.exit}
+                transition={{ delay: 0.4, ...FadeInBottom.transition }}
               >
                 <NetflixIcon width={50} height={50} fill="red" stroke="red" />
               </motion.div>
               <motion.div
-                initial={{ opacity: 0, y: 40 }}
-                animate={{ opacity: 1, y: 0 }}
+                ref={detailRef.ref}
+                initial={FadeInBottom.initial}
+                animate={detailRef.isInView ? FadeInBottom.animate : {}}
                 exit={{ opacity: 0, x: 400 }}
-                transition={{ duration: 1, delay: 0.5 }}
+                transition={{ delay: 0.5, ...FadeInBottom.transition }}
               >
                 <AirplaneIcon width={50} height={50} />
               </motion.div>
@@ -185,6 +231,30 @@ const AboutSection = () => {
           </motion.div>
         )}
       </AnimatePresence>
+
+      <motion.div className="mt-40">
+        <AppSectionDivider
+          ref={detailRef.ref}
+          initial={ScaleUp.initial}
+          animate={detailRef.isInView ? ScaleUp.animate : {}}
+          transition={ScaleUp.transition}
+          label="My Stack"
+        />
+        <motion.div className="flex flex-col gap-2 mt-10">
+          {myStacks.map((item, index) => (
+            <motion.div key={index} className="relative ">
+              <motion.div
+                initial={{ height: 60 }}
+                whileHover={{ height: 200 }}
+                transition={{ duration: 0.8, bounce: 0.3, type: "spring" }}
+                className="border border-Hazy-700 py-4 px-8 rounded-4xl"
+              >
+                {item.label}
+              </motion.div>
+            </motion.div>
+          ))}
+        </motion.div>
+      </motion.div>
     </motion.div>
   );
 };
