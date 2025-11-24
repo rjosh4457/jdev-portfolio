@@ -80,21 +80,13 @@ export default function ProjectCard({
               align={align}
             />
             {windowWidth >= 1025 && (
-              <Label
-                align={align}
-                description={description}
-                ref={ref}
-              />
+              <Label align={align} description={description} ref={ref} />
             )}
           </>
         ) : (
           <>
             {windowWidth >= 1025 && (
-              <Label
-                align={align}
-                description={description}
-                ref={ref}
-              />
+              <Label align={align} description={description} ref={ref} />
             )}
 
             <Content

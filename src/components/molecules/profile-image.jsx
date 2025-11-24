@@ -9,14 +9,13 @@ const ProfileImage = () => {
       initial={ScaleUp.initial}
       animate={ScaleUp.animate}
       transition={{ duration: 0.8 }}
-      className="bg-blue-500 aspect-square m-8 rounded-4xl relative overflow-hidden"
+      className="mx-auto my-10"
     >
       <Image
         src={profileImg}
         loading="eager"
         alt="Profile"
-        fill
-        className="object-cover"
+        className="w-60 h-60 object-contain rounded-full"
       />
     </motion.div>
   );
