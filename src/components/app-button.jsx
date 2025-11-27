@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
 
-const AppButton = ({ children, ...props }) => {
+const  AppButton = ({ children, ...props }) => {
   return (
     <motion.button
       {...props}

@@ -1,5 +1,4 @@
 import AppSectionDivider from "@/components/app-section-divider";
-import AppTypewriterText from "@/components/app-typewriter-text";
 import AirplaneIcon from "@/components/icons/airplane-icon";
 import AWSIcon from "@/components/icons/aws-icon";
 import ExpoIcon from "@/components/icons/expo-icon";
@@ -20,7 +19,6 @@ import ReactIcon from "@/components/icons/react-icon";
 import SupabaseIcon from "@/components/icons/supabase-icon";
 import TailwindIcon from "@/components/icons/tailwind-icon";
 import VueIcon from "@/components/icons/vue-icon";
-import XboxIcon from "@/components/icons/xbox-icon";
 import useAnimation from "@/hooks/use-animation";
 import {
   FadeInBottom,
@@ -30,7 +28,7 @@ import {
   ScaleUp,
 } from "@/utils/animation-configs";
 import { AnimatePresence, motion, useInView } from "motion/react";
-import { useEffect, useRef, useState } from "react";
+import { createRef, useEffect, useRef, useState } from "react";
 
 const AboutSection = () => {
   const contentElHeader = useAnimation();
@@ -38,7 +36,7 @@ const AboutSection = () => {
   const myStackElLabel = useAnimation();
   const contentElLabel = useAnimation();
 
-  const myStacks = [
+  const initialStacks = [
     {
       category: "Front-End",
       stacks: [
@@ -50,6 +48,7 @@ const AboutSection = () => {
         <TailwindIcon />,
         <FramerMotionIcon />,
       ],
+      isToggle: true,
     },
     {
       category: "Back-End / Cloud",
@@ -61,6 +60,7 @@ const AboutSection = () => {
         <MySQLIcon />,
         <PostgreSQLIcon />,
       ],
+      isToggle: false,
     },
     {
       category: "Tools & DevOps",
@@ -69,14 +69,19 @@ const AboutSection = () => {
         <GitlabIcon />,
         <GitIcon />,
       ],
+      isToggle: false,
     },
     {
       category: "UI / UX",
       stacks: [<FigmaIcon />],
+      isToggle: false,
     },
   ];
 
+  const [myStacks, setMyStacks] = useState(initialStacks);
   const [tick, setTick] = useState(0);
+
+  // Auto rotate sections
   useEffect(() => {
     const interval = setInterval(() => {
       setTick((prev) => (prev >= 2 ? 0 : prev + 1));
@@ -85,8 +90,12 @@ const AboutSection = () => {
     return () => clearInterval(interval);
   }, []);
 
+  // Refs for stack sections
+  const stackRefs = useRef(myStacks.map(() => createRef()));
+
   return (
     <motion.div id="about-section" className="flex flex-col gap-10 pt-10 mb-40">
+      {/* About Section Divider */}
       <AppSectionDivider
         ref={contentElLabel.ref}
         initial={ScaleUp.initial}
@@ -94,6 +103,8 @@ const AboutSection = () => {
         transition={ScaleUp.transition}
         label="About"
       />
+
+      {/* Rotating Intro Sections */}
       <AnimatePresence mode="wait">
         {tick === 0 && (
           <motion.div
@@ -108,8 +119,8 @@ const AboutSection = () => {
               transition={FadeInLeft.transition}
               className="text-6xl"
             >
-              The
-              <motion.span className="text-highlight"> Engineer </motion.span>
+              The{" "}
+              <motion.span className="text-highlight"> Engineer </motion.span>{" "}
               Behind the Experience
             </motion.h1>
             <motion.h1
@@ -140,9 +151,10 @@ const AboutSection = () => {
             </motion.h1>
           </motion.div>
         )}
+
         {tick === 1 && (
           <motion.div
-            key="section-2"
+            key="section-1"
             className="flex flex-col gap-4 w-full xl:w-[65%]"
           >
             <motion.h1
@@ -162,7 +174,7 @@ const AboutSection = () => {
               transition={{ delay: 0.2, ...FadeInLeft.transition }}
               className="sub-text"
             >
-              As a<span className="text-highlight">&nbsp;Web Developer</span>, I
+              As a <span className="text-highlight">Web Developer</span>, I
               don’t just build interfaces — I create smooth, fast, and enjoyable
               experiences. I love making apps that feel great to use, easy to
               maintain, and ready to scale as they grow.
@@ -180,6 +192,7 @@ const AboutSection = () => {
               Vue.js. It helps keep projects organized, makes development
               faster, and ensures everything looks and works consistently.
             </motion.h1>
+
             <motion.h1
               initial={FadeInLeft.initial}
               animate={FadeInLeft.animate}
@@ -187,16 +200,17 @@ const AboutSection = () => {
               transition={{ delay: 0.2, ...FadeInLeft.transition }}
               className="sub-text"
             >
-              <b>Performance Optimization:</b> <br /> Speed matters. Whether
-              it’s code splitting, lazy loading, or fine-tuning how data is
-              fetched, I’m always focused on making apps load quicker and run
-              smoother.
+              <b>Performance Optimization:</b>
+              <br /> Speed matters. Whether it’s code splitting, lazy loading,
+              or fine-tuning how data is fetched, I’m always focused on making
+              apps load quicker and run smoother.
             </motion.h1>
           </motion.div>
         )}
+
         {tick === 2 && (
           <motion.div
-            key="section-3"
+            key="section-2"
             className="flex flex-col gap-4 w-full xl:w-[65%]"
           >
             <motion.h1
@@ -221,6 +235,7 @@ const AboutSection = () => {
               editor, you can usually find me gaming, watching movies, or
               traveling.
             </motion.h1>
+
             <motion.div className="flex gap-10 mt-10">
               <motion.div
                 initial={FadeInBottom.initial}
@@ -259,6 +274,7 @@ const AboutSection = () => {
         )}
       </AnimatePresence>
 
+      {/* My Stack Section */}
       <motion.div className="mt-40">
         <AppSectionDivider
           ref={myStackElLabel.ref}
@@ -267,42 +283,59 @@ const AboutSection = () => {
           transition={ScaleUp.transition}
           label="My Stack"
         />
-        <motion.div className="flex flex-col gap-2 mt-10 ">
+
+        <motion.div className="flex flex-col gap-2 mt-10">
           {myStacks.map((item, index) => {
-            const ref = useRef(null);
+            const ref = stackRefs.current[index];
             const inView = useInView(ref, { once: true });
+
             return (
               <motion.div
                 key={index}
                 ref={ref}
                 initial={{ opacity: 0 }}
                 animate={inView ? ScaleUp.animate : {}}
-                whileHover="isParentHovered"
                 transition={{
                   delay: index * 0.2,
                   duration: 1,
                   borderColor: { duration: 0.4 },
                   height: { duration: 0.1 },
                 }}
-                className="flex flex-col w-full align-center cursor-pointer"
+                className="flex flex-col w-full cursor-pointer"
               >
-                <motion.h1 className="text-highlight">
+                <motion.h1
+                  className="text-highlight"
+                  onClick={() =>
+                    setMyStacks((prev) =>
+                      prev.map((stack, i) =>
+                        i === index
+                          ? { ...stack, isToggle: !stack.isToggle }
+                          : stack
+                      )
+                    )
+                  }
+                >
                   {item.category}
                 </motion.h1>
+
                 <AnimatePresence mode="wait">
                   <motion.div
                     initial={{ height: 0, opacity: 0 }}
-                    variants={{
-                      isParentHovered: { height: "fit-content", opacity: 1 },
-                    }}
-                    exit={{ height: 0 }}
-                    className="overflow-hidden flex flex-wrap gap-10 px-2 py-6"
+                    animate={
+                      item.isToggle
+                        ? { height: "fit-content", opacity: 1 }
+                        : { height: 0, opacity: 0 }
+                    }
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="overflow-hidden flex flex-wrap justify-start gap-10 py-6"
                   >
                     {item.stacks.map((s, i) => (
                       <motion.div
                         key={i}
                         initial={{ scale: 1 }}
-                        whileHover={{ scale: 1.1 }}
+                        whileHover={{ scale: 1.1 }} // desktop hover
+                        whileTap={{ scale: 1.05 }} // mobile tap
                         transition={{ duration: 0.2 }}
                         className="min-w-25 min-h-25 bg-Hazy-700 rounded-2xl flex justify-center items-center"
                       >
@@ -319,4 +352,5 @@ const AboutSection = () => {
     </motion.div>
   );
 };
+
 export default AboutSection;

@@ -54,7 +54,11 @@ const ProfileDetails = () => {
             animate={details.isInView ? FadeIn.animate : {}}
             transition={{ delay: 0.3, ...FadeIn.transition }}
           >
-            <AppCircularButton>
+            <AppCircularButton
+              onClick={() => {
+                window.location.href = "mailto:support@example.com";
+              }}
+            >
               <MailIcon />
             </AppCircularButton>
           </motion.div>
@@ -84,7 +88,11 @@ const ProfileDetails = () => {
             animate={details.isInView ? FadeIn.animate : {}}
             transition={{ delay: 0.3, ...FadeIn.transition }}
           >
-            <AppCircularButton>
+            <AppCircularButton
+              onClick={() =>
+                window.open("https://github.com/rjosh4457", "_blank")
+              }
+            >
               <GithubIcon />
             </AppCircularButton>
           </motion.div>
@@ -109,9 +117,7 @@ const ProfileDetails = () => {
       >
         <AppButton
           onClick={() => {
-            document.getElementById("main-section")?.scrollIntoView({
-              behavior: "smooth",
-            });
+            window.location.href = "mailto:support@example.com";
           }}
         >
           <motion.span
