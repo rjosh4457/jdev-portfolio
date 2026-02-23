@@ -81,7 +81,7 @@ const KingdomsEdgeDescription = () => {
         <motion.p className="mt-4">
           View the source code and project details on GitHub:{" "}
           <a
-            href="https://github.com/yourusername/kingdoms-edge"
+            href="https://github.com/rjosh4457/kingdoms-edge"
             target="_blank"
             rel="noopener noreferrer"
             className="text-highlight underline"
