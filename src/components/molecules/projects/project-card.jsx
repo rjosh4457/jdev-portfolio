@@ -1,7 +1,10 @@
-
+import AppPills from "@/components/app-pills";
+import { FadeInLeft, FadeInRight, FadeInTop } from "@/utils/animation-configs";
 import clsx from "clsx";
 import { motion, useInView } from "motion/react";
-import Image from "next/image";;
+import Image from "next/image";
+import { useWindowWidth } from "@/hooks/useWindowWidth";
+import { useEffect, useState } from "react";
 
 const Content = ({ img, alt, pills = [], align, innerRef }) => {
   const isInView = useInView(innerRef, { once: true });
@@ -19,7 +22,7 @@ const Content = ({ img, alt, pills = [], align, innerRef }) => {
           src={img}
           alt={alt}
           loading="eager"
-          className="rounded-xl object-cover"
+          className="w-full h-full object-contain rounded-xl"
         />
       </motion.div>
 
@@ -44,7 +47,7 @@ const Label = ({ description, align, innerRef, className, props }) => {
       className={clsx(
         className,
         "flex-1",
-        align === "left" ? "ml-10" : "mr-10"
+        align === "left" ? "ml-10" : "mr-10",
       )}
     >
       <motion.h1 className="text-md">{description}</motion.h1>
@@ -53,25 +56,59 @@ const Label = ({ description, align, innerRef, className, props }) => {
 };
 
 export default function ProjectCard({
-  onClick,
-  ...props
+  img,
+  alt,
+  pills = [],
+  title,
+  description,
+  align,
+  innerRef,
 }) {
+  const windowWidth = useWindowWidth();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
   return (
-    <motion.div
-      onClick={onClick}
-      className="cursor-pointer"
-      whileHover={{ scale: 1.01 }}
-    >
+    <motion.div>
       <div className="flex">
-        {props.align === "left" ? (
+        {align === "left" ? (
           <>
-            <Content {...props} />
-            {props.showLabel && <Label {...props} />}
+            <Content
+              innerRef={innerRef}
+              img={img}
+              alt={alt}
+              pills={pills}
+              title={title}
+              align={align}
+            />
+            {mounted && windowWidth >= 1025 && (
+              <Label
+                align={align}
+                description={description}
+                innerRef={innerRef}
+              />
+            )}
           </>
         ) : (
           <>
-            {props.showLabel && <Label {...props} />}
-            <Content {...props} />
+            {mounted && windowWidth >= 1025 && (
+              <Label
+                align={align}
+                description={description}
+                innerRef={innerRef}
+              />
+            )}
+
+            <Content
+              innerRef={innerRef}
+              img={img}
+              alt={alt}
+              pills={pills}
+              title={title}
+              align={align}
+            />
           </>
         )}
       </div>
