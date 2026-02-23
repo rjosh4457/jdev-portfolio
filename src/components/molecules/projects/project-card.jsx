@@ -1,10 +1,7 @@
-import AppPills from "@/components/app-pills";
-import { FadeInLeft, FadeInRight, FadeInTop } from "@/utils/animation-configs";
+
 import clsx from "clsx";
 import { motion, useInView } from "motion/react";
-import Image from "next/image";
-import { useWindowWidth } from "@/hooks/useWindowWidth";
-import { useEffect, useState } from "react";
+import Image from "next/image";;
 
 const Content = ({ img, alt, pills = [], align, innerRef }) => {
   const isInView = useInView(innerRef, { once: true });
@@ -16,13 +13,13 @@ const Content = ({ img, alt, pills = [], align, innerRef }) => {
         initial={animation.initial}
         animate={isInView ? animation.animate : {}}
         transition={{ duration: 0.5 }}
-        className="rounded-2xl overflow-hidden w-full h-[420px]"
+        className="rounded-2xl overflow-hidden w-full aspect-auto"
       >
         <Image
           src={img}
           alt={alt}
           loading="eager"
-          className="w-full h-full object-contain rounded-xl"
+          className="rounded-xl object-cover"
         />
       </motion.div>
 
@@ -47,7 +44,7 @@ const Label = ({ description, align, innerRef, className, props }) => {
       className={clsx(
         className,
         "flex-1",
-        align === "left" ? "ml-10" : "mr-10",
+        align === "left" ? "ml-10" : "mr-10"
       )}
     >
       <motion.h1 className="text-md">{description}</motion.h1>
@@ -56,59 +53,25 @@ const Label = ({ description, align, innerRef, className, props }) => {
 };
 
 export default function ProjectCard({
-  img,
-  alt,
-  pills = [],
-  title,
-  description,
-  align,
-  innerRef,
+  onClick,
+  ...props
 }) {
-  const windowWidth = useWindowWidth();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
   return (
-    <motion.div>
+    <motion.div
+      onClick={onClick}
+      className="cursor-pointer"
+      whileHover={{ scale: 1.01 }}
+    >
       <div className="flex">
-        {align === "left" ? (
+        {props.align === "left" ? (
           <>
-            <Content
-              innerRef={innerRef}
-              img={img}
-              alt={alt}
-              pills={pills}
-              title={title}
-              align={align}
-            />
-            {mounted && windowWidth >= 1025 && (
-              <Label
-                align={align}
-                description={description}
-                innerRef={innerRef}
-              />
-            )}
+            <Content {...props} />
+            {props.showLabel && <Label {...props} />}
           </>
         ) : (
           <>
-            {mounted && windowWidth >= 1025 && (
-              <Label
-                align={align}
-                description={description}
-                innerRef={innerRef}
-              />
-            )}
-
-            <Content
-              innerRef={innerRef}
-              img={img}
-              alt={alt}
-              pills={pills}
-              title={title}
-              align={align}
-            />
+            {props.showLabel && <Label {...props} />}
+            <Content {...props} />
           </>
         )}
       </div>
