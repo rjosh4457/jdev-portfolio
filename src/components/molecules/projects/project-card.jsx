@@ -12,19 +12,19 @@ const Content = ({ img, alt, pills = [], align, innerRef }) => {
   return (
     <motion.div className="flex flex-col gap-6 xl:w-1/2">
       <motion.div
-        ref={innerRef}
-        initial={animation.initial}
-        animate={isInView ? animation.animate : {}}
-        transition={{ duration: 0.5 }}
-        className="rounded-2xl overflow-hidden w-full aspect-auto"
-      >
-        <Image
-          src={img}
-          alt={alt}
-          loading="eager"
-          className="rounded-xl object-cover"
-        />
-      </motion.div>
+  ref={innerRef}
+  initial={animation.initial}
+  animate={isInView ? animation.animate : {}}
+  transition={{ duration: 0.5 }}
+  className="rounded-2xl overflow-hidden w-full h-[320px]"
+>
+  <Image
+    src={img}
+    alt={alt}
+    loading="eager"
+    className="w-full h-full object-contain rounded-xl"
+  />
+</motion.div>
 
       <motion.div className="flex flex-wrap gap-4">
         {pills.map((p, i) => (
