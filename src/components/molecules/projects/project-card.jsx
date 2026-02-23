@@ -16,7 +16,7 @@ const Content = ({ img, alt, pills = [], align, innerRef }) => {
         initial={animation.initial}
         animate={isInView ? animation.animate : {}}
         transition={{ duration: 0.5 }}
-        className="rounded-2xl overflow-hidden w-full h-[520px]"
+        className="rounded-2xl overflow-hidden w-full h-[420px]"
       >
         <Image
           src={img}
