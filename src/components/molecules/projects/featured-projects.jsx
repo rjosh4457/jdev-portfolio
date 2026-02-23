@@ -42,6 +42,17 @@ const TempoDescription = () => {
           Both users get a synchronized start to a 10-minute conversation
           session, enabling immediate and fluid interaction.
         </motion.li>
+        <motion.p className="mt-4">
+          View the source code and project details on GitHub:{" "}
+          <a
+            href="https://github.com/rjosh4457/tempo"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-highlight underline"
+          >
+            https://github.com/rjosh4457/tempo
+          </a>
+        </motion.p>
       </motion.ol>
     </motion.div>
   );
