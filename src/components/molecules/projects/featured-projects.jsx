@@ -6,6 +6,7 @@ import Image from "next/image";
 import carRentalImage from "@/assets/projects/car-rental-wide.png";
 import culinexImg from "@/assets/projects/culinex.png";
 import tempoImg from "@/assets/projects/tempo.png";
+import kingdomsEdge from "@/assets/projects/kingdoms-edge.jpg"
 import AppPills from "@/components/app-pills";
 import ProjectCard from "./project-card";
 import { useRef } from "react";
@@ -45,10 +46,64 @@ const TempoDescription = () => {
     </motion.div>
   );
 };
+
+const KingdomsEdgeDescription = () => {
+  return (
+    <motion.div>
+      <motion.h1>
+        <motion.span className="text-highlight">Kingdoms Edge</motion.span> is a
+        2D exploration and tactical adventure game where players journey across
+        a dynamic world filled with discovery and danger. The game blends
+        character progression, strategic combat, and immersive exploration with
+        a map-driven travel system and event-based encounters.
+      </motion.h1>
+
+      <motion.ol
+        type="list"
+        className="list-decimal mt-4 ml-6 flex flex-col gap-2"
+      >
+        <motion.li>
+          Players explore a 2D map and click destinations to auto-route across
+          realms.
+        </motion.li>
+        <motion.li>
+          During travel, random events may occur — combat, treasures, or traps —
+          creating dynamic gameplay.
+        </motion.li>
+        <motion.li>
+          Combat requires tactical skill selection, rewarding strategic
+          decision-making.
+        </motion.li>
+        <motion.li>
+          Each expedition is unique, offering varied experiences and meaningful
+          player choices.
+        </motion.li>
+        <motion.p className="mt-4">
+          View the source code and project details on GitHub:{" "}
+          <a
+            href="https://github.com/yourusername/kingdoms-edge"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-highlight underline"
+          >
+            https://github.com/rjosh4457/kingdoms-edge
+          </a>
+        </motion.p>
+      </motion.ol>
+    </motion.div>
+  );
+};
 const FeaturedProjects = () => {
   const title = useAnimation();
 
   const projectItems = [
+    {
+      img: kingdomsEdge,
+      alt: "Kingdoms Edge - Fantasy IDLE RPG Game",
+      pills: ["React Native", "Expo", "Supabase", "TypeScript"],
+      align: "right",
+      description: <KingdomsEdgeDescription />,
+    },
     {
       img: tempoImg,
       alt: "Tempo - Social And Dating App Project",
@@ -75,7 +130,10 @@ const FeaturedProjects = () => {
   ];
 
   return (
-    <motion.div id="featured-projects" className="flex flex-col gap-10 pt-10 mb-40">
+    <motion.div
+      id="featured-projects"
+      className="flex flex-col gap-10 pt-10 mb-40"
+    >
       <AppSectionDivider
         initial={ScaleUp.initial}
         animate={title.isInView ? ScaleUp.animate : {}}
