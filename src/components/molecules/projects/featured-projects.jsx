@@ -6,7 +6,7 @@ import Image from "next/image";
 import carRentalImage from "@/assets/projects/car-rental-wide.png";
 import culinexImg from "@/assets/projects/culinex.png";
 import tempoImg from "@/assets/projects/tempo.png";
-import kingdomsEdge from "@/assets/projects/kingdoms-edge.jpg"
+import kingdomsEdge from "@/assets/projects/kingdoms-edge.png"
 import AppPills from "@/components/app-pills";
 import ProjectCard from "./project-card";
 import { useRef } from "react";
